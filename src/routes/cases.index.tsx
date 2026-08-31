@@ -3,7 +3,7 @@ import { Filter, Plus } from "lucide-react";
 import { PageHeading, Panel, Pill, toneForResult } from "@/components/primitives";
 import { cases, currency } from "@/data/mock";
 
-export const Route = createFileRoute("/cases")({
+export const Route = createFileRoute("/cases/")({
   head: () => ({
     meta: [
       { title: "Credit Cases | Apexon Credit Intelligence Fabric" },
