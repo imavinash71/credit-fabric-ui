@@ -15,7 +15,7 @@ export const Route = createFileRoute("/cases/$caseId/policy")({
       { property: "og:description", content: "Policy rule results, exceptions and KYC screening for the credit file." },
     ],
   }),
-  component: PolicyKyc;
+  component: PolicyKyc,
 });
 
 function PolicyKyc() {
