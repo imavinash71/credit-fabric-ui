@@ -22,8 +22,8 @@ export const Route = createFileRoute("/cases/$caseId/agents")({
 const filters = ["All agents", "Financial agent", "Credit policy agent", "Compliance / KYC agent"];
 
 function Agents() {
-  const [filter, setFilter] = useState(filters[0]);
-  const visible = filter === filters[0] ? agentInsights : agentInsights.filter((a) => a.agent === filter);
+  const [filter, setFilter] = useState(filters[0]!);
+  const visible = filter === filters[0]! ? agentInsights : agentInsights.filter((a) => a.agent === filter);
 
   return (
     <div className="grid gap-6 xl:grid-cols-4">
