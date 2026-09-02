@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CasesIndexRouteImport } from './routes/cases.index'
 import { Route as CasesCaseIdRouteImport } from './routes/cases.$caseId'
 import { Route as CasesCaseIdIndexRouteImport } from './routes/cases.$caseId.index'
+import { Route as CasesCaseIdAgentsRouteImport } from './routes/cases.$caseId.agents'
 import { Route as CasesCaseIdDocumentsRouteImport } from './routes/cases.$caseId.documents'
 import { Route as CasesCaseIdPolicyRouteImport } from './routes/cases.$caseId.policy'
 import { Route as CasesCaseIdSpreadingRouteImport } from './routes/cases.$caseId.spreading'
@@ -37,6 +38,11 @@ const CasesCaseIdIndexRoute = CasesCaseIdIndexRouteImport.update({
   path: '/',
   getParentRoute: () => CasesCaseIdRoute,
 } as any)
+const CasesCaseIdAgentsRoute = CasesCaseIdAgentsRouteImport.update({
+  id: '/agents',
+  path: '/agents',
+  getParentRoute: () => CasesCaseIdRoute,
+} as any)
 const CasesCaseIdDocumentsRoute = CasesCaseIdDocumentsRouteImport.update({
   id: '/documents',
   path: '/documents',
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cases/$caseId': typeof CasesCaseIdRouteWithChildren
   '/cases/': typeof CasesIndexRoute
+  '/cases/$caseId/agents': typeof CasesCaseIdAgentsRoute
   '/cases/$caseId/documents': typeof CasesCaseIdDocumentsRoute
   '/cases/$caseId/policy': typeof CasesCaseIdPolicyRoute
   '/cases/$caseId/spreading': typeof CasesCaseIdSpreadingRoute
@@ -65,6 +72,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cases': typeof CasesIndexRoute
+  '/cases/$caseId/agents': typeof CasesCaseIdAgentsRoute
   '/cases/$caseId/documents': typeof CasesCaseIdDocumentsRoute
   '/cases/$caseId/policy': typeof CasesCaseIdPolicyRoute
   '/cases/$caseId/spreading': typeof CasesCaseIdSpreadingRoute
@@ -75,6 +83,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/cases/$caseId': typeof CasesCaseIdRouteWithChildren
   '/cases/': typeof CasesIndexRoute
+  '/cases/$caseId/agents': typeof CasesCaseIdAgentsRoute
   '/cases/$caseId/documents': typeof CasesCaseIdDocumentsRoute
   '/cases/$caseId/policy': typeof CasesCaseIdPolicyRoute
   '/cases/$caseId/spreading': typeof CasesCaseIdSpreadingRoute
@@ -86,6 +95,7 @@ export interface FileRouteTypes {
     | '/'
     | '/cases/$caseId'
     | '/cases/'
+    | '/cases/$caseId/agents'
     | '/cases/$caseId/documents'
     | '/cases/$caseId/policy'
     | '/cases/$caseId/spreading'
@@ -94,6 +104,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/cases'
+    | '/cases/$caseId/agents'
     | '/cases/$caseId/documents'
     | '/cases/$caseId/policy'
     | '/cases/$caseId/spreading'
@@ -103,6 +114,7 @@ export interface FileRouteTypes {
     | '/'
     | '/cases/$caseId'
     | '/cases/'
+    | '/cases/$caseId/agents'
     | '/cases/$caseId/documents'
     | '/cases/$caseId/policy'
     | '/cases/$caseId/spreading'
@@ -145,6 +157,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CasesCaseIdIndexRouteImport
       parentRoute: typeof CasesCaseIdRoute
     }
+    '/cases/$caseId/agents': {
+      id: '/cases/$caseId/agents'
+      path: '/agents'
+      fullPath: '/cases/$caseId/agents'
+      preLoaderRoute: typeof CasesCaseIdAgentsRouteImport
+      parentRoute: typeof CasesCaseIdRoute
+    }
     '/cases/$caseId/documents': {
       id: '/cases/$caseId/documents'
       path: '/documents'
@@ -170,6 +189,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface CasesCaseIdRouteChildren {
+  CasesCaseIdAgentsRoute: typeof CasesCaseIdAgentsRoute
   CasesCaseIdDocumentsRoute: typeof CasesCaseIdDocumentsRoute
   CasesCaseIdPolicyRoute: typeof CasesCaseIdPolicyRoute
   CasesCaseIdSpreadingRoute: typeof CasesCaseIdSpreadingRoute
@@ -177,6 +197,7 @@ interface CasesCaseIdRouteChildren {
 }
 
 const CasesCaseIdRouteChildren: CasesCaseIdRouteChildren = {
+  CasesCaseIdAgentsRoute: CasesCaseIdAgentsRoute,
   CasesCaseIdDocumentsRoute: CasesCaseIdDocumentsRoute,
   CasesCaseIdPolicyRoute: CasesCaseIdPolicyRoute,
   CasesCaseIdSpreadingRoute: CasesCaseIdSpreadingRoute,
