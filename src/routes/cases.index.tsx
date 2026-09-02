@@ -52,7 +52,7 @@ function CaseList() {
             {cases.map((c) => (
               <tr key={c.id} className="border-b border-border/60 last:border-0 hover:bg-surface-muted">
                 <td className="px-5 py-3.5">
-                  <Link to="/cases/$caseId" params={{ caseId: c.id }} className="num text-xs font-medium text-accent hover:underline">
+                  <Link to="/cases/$caseId" params={{ caseId: c.id }} className="num whitespace-nowrap text-xs font-medium text-accent hover:underline">
                     {c.id}
                   </Link>
                   <div className="mt-0.5 text-[11px] text-muted-foreground">{c.submitted}</div>

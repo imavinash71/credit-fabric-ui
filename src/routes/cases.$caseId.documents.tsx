@@ -20,8 +20,8 @@ export const Route = createFileRoute("/cases/$caseId/documents")({
 });
 
 function Documents() {
-  const [selected, setSelected] = useState(documents[0].id);
-  const doc = documents.find((d) => d.id === selected) ?? documents[0];
+  const [selected, setSelected] = useState(documents[0]!.id);
+  const doc = documents.find((d) => d.id === selected) ?? documents[0]!;
   const received = documents.filter((d) => d.status !== "Missing" && d.status !== "Queued").length;
 
   return (

@@ -96,7 +96,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       </aside>
 
       <div className="lg:pl-64">
-        <header className="sticky top-0 z-20 flex h-14 items-center gap-4 border-b border-border bg-surface/95 px-5 backdropropdrop-blur">
+        <header className="sticky top-0 z-20 flex h-14 items-center gap-4 border-b border-border bg-surface/95 px-5 backdrop-blur">
           <div className="relative hidden max-w-md flex-1 md:block">
             <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
             <input

@@ -186,7 +186,7 @@ export const cases: CreditCase[] = [
 export const primaryCaseId = "CC-2026-0481";
 
 export function getCase(id: string) {
-  return cases.find((c) => c.id === id) ?? cases[0];
+  return (cases.find((c) => c.id === id) ?? cases[0])!;
 }
 
 /* ---------------------------------- KPIs --------------------------------- */
