@@ -14,6 +14,7 @@ import { Route as CasesIndexRouteImport } from './routes/cases.index'
 import { Route as CasesCaseIdRouteImport } from './routes/cases.$caseId'
 import { Route as CasesCaseIdIndexRouteImport } from './routes/cases.$caseId.index'
 import { Route as CasesCaseIdAgentsRouteImport } from './routes/cases.$caseId.agents'
+import { Route as CasesCaseIdAuditRouteImport } from './routes/cases.$caseId.audit'
 import { Route as CasesCaseIdDecisionRouteImport } from './routes/cases.$caseId.decision'
 import { Route as CasesCaseIdDocumentsRouteImport } from './routes/cases.$caseId.documents'
 import { Route as CasesCaseIdPolicyRouteImport } from './routes/cases.$caseId.policy'
@@ -44,6 +45,11 @@ const CasesCaseIdAgentsRoute = CasesCaseIdAgentsRouteImport.update({
   path: '/agents',
   getParentRoute: () => CasesCaseIdRoute,
 } as any)
+const CasesCaseIdAuditRoute = CasesCaseIdAuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
+  getParentRoute: () => CasesCaseIdRoute,
+} as any)
 const CasesCaseIdDecisionRoute = CasesCaseIdDecisionRouteImport.update({
   id: '/decision',
   path: '/decision',
@@ -70,6 +76,7 @@ export interface FileRoutesByFullPath {
   '/cases/$caseId': typeof CasesCaseIdRouteWithChildren
   '/cases/': typeof CasesIndexRoute
   '/cases/$caseId/agents': typeof CasesCaseIdAgentsRoute
+  '/cases/$caseId/audit': typeof CasesCaseIdAuditRoute
   '/cases/$caseId/decision': typeof CasesCaseIdDecisionRoute
   '/cases/$caseId/documents': typeof CasesCaseIdDocumentsRoute
   '/cases/$caseId/policy': typeof CasesCaseIdPolicyRoute
@@ -80,6 +87,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cases': typeof CasesIndexRoute
   '/cases/$caseId/agents': typeof CasesCaseIdAgentsRoute
+  '/cases/$caseId/audit': typeof CasesCaseIdAuditRoute
   '/cases/$caseId/decision': typeof CasesCaseIdDecisionRoute
   '/cases/$caseId/documents': typeof CasesCaseIdDocumentsRoute
   '/cases/$caseId/policy': typeof CasesCaseIdPolicyRoute
@@ -92,6 +100,7 @@ export interface FileRoutesById {
   '/cases/$caseId': typeof CasesCaseIdRouteWithChildren
   '/cases/': typeof CasesIndexRoute
   '/cases/$caseId/agents': typeof CasesCaseIdAgentsRoute
+  '/cases/$caseId/audit': typeof CasesCaseIdAuditRoute
   '/cases/$caseId/decision': typeof CasesCaseIdDecisionRoute
   '/cases/$caseId/documents': typeof CasesCaseIdDocumentsRoute
   '/cases/$caseId/policy': typeof CasesCaseIdPolicyRoute
@@ -105,6 +114,7 @@ export interface FileRouteTypes {
     | '/cases/$caseId'
     | '/cases/'
     | '/cases/$caseId/agents'
+    | '/cases/$caseId/audit'
     | '/cases/$caseId/decision'
     | '/cases/$caseId/documents'
     | '/cases/$caseId/policy'
@@ -115,6 +125,7 @@ export interface FileRouteTypes {
     | '/'
     | '/cases'
     | '/cases/$caseId/agents'
+    | '/cases/$caseId/audit'
     | '/cases/$caseId/decision'
     | '/cases/$caseId/documents'
     | '/cases/$caseId/policy'
@@ -126,6 +137,7 @@ export interface FileRouteTypes {
     | '/cases/$caseId'
     | '/cases/'
     | '/cases/$caseId/agents'
+    | '/cases/$caseId/audit'
     | '/cases/$caseId/decision'
     | '/cases/$caseId/documents'
     | '/cases/$caseId/policy'
@@ -176,6 +188,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CasesCaseIdAgentsRouteImport
       parentRoute: typeof CasesCaseIdRoute
     }
+    '/cases/$caseId/audit': {
+      id: '/cases/$caseId/audit'
+      path: '/audit'
+      fullPath: '/cases/$caseId/audit'
+      preLoaderRoute: typeof CasesCaseIdAuditRouteImport
+      parentRoute: typeof CasesCaseIdRoute
+    }
     '/cases/$caseId/decision': {
       id: '/cases/$caseId/decision'
       path: '/decision'
@@ -209,6 +228,7 @@ declare module '@tanstack/react-router' {
 
 interface CasesCaseIdRouteChildren {
   CasesCaseIdAgentsRoute: typeof CasesCaseIdAgentsRoute
+  CasesCaseIdAuditRoute: typeof CasesCaseIdAuditRoute
   CasesCaseIdDecisionRoute: typeof CasesCaseIdDecisionRoute
   CasesCaseIdDocumentsRoute: typeof CasesCaseIdDocumentsRoute
   CasesCaseIdPolicyRoute: typeof CasesCaseIdPolicyRoute
@@ -218,6 +238,7 @@ interface CasesCaseIdRouteChildren {
 
 const CasesCaseIdRouteChildren: CasesCaseIdRouteChildren = {
   CasesCaseIdAgentsRoute: CasesCaseIdAgentsRoute,
+  CasesCaseIdAuditRoute: CasesCaseIdAuditRoute,
   CasesCaseIdDecisionRoute: CasesCaseIdDecisionRoute,
   CasesCaseIdDocumentsRoute: CasesCaseIdDocumentsRoute,
   CasesCaseIdPolicyRoute: CasesCaseIdPolicyRoute,
