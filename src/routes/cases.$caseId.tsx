@@ -12,6 +12,7 @@ const tabs = [
   { key: "spreading", label: "Spreading & ratios" },
   { key: "policy", label: "Policy & KYC" },
   { key: "agents", label: "Agent insights" },
+  { key: "knowledge", label: "Chat & knowledge graph" },
   { key: "decision", label: "Recommendation" },
   { key: "audit", label: "Audit trail" },
 ];

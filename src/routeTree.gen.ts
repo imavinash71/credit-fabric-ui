@@ -17,6 +17,7 @@ import { Route as CasesCaseIdAgentsRouteImport } from './routes/cases.$caseId.ag
 import { Route as CasesCaseIdAuditRouteImport } from './routes/cases.$caseId.audit'
 import { Route as CasesCaseIdDecisionRouteImport } from './routes/cases.$caseId.decision'
 import { Route as CasesCaseIdDocumentsRouteImport } from './routes/cases.$caseId.documents'
+import { Route as CasesCaseIdKnowledgeRouteImport } from './routes/cases.$caseId.knowledge'
 import { Route as CasesCaseIdPolicyRouteImport } from './routes/cases.$caseId.policy'
 import { Route as CasesCaseIdSpreadingRouteImport } from './routes/cases.$caseId.spreading'
 
@@ -60,6 +61,11 @@ const CasesCaseIdDocumentsRoute = CasesCaseIdDocumentsRouteImport.update({
   path: '/documents',
   getParentRoute: () => CasesCaseIdRoute,
 } as any)
+const CasesCaseIdKnowledgeRoute = CasesCaseIdKnowledgeRouteImport.update({
+  id: '/knowledge',
+  path: '/knowledge',
+  getParentRoute: () => CasesCaseIdRoute,
+} as any)
 const CasesCaseIdPolicyRoute = CasesCaseIdPolicyRouteImport.update({
   id: '/policy',
   path: '/policy',
@@ -79,6 +85,7 @@ export interface FileRoutesByFullPath {
   '/cases/$caseId/audit': typeof CasesCaseIdAuditRoute
   '/cases/$caseId/decision': typeof CasesCaseIdDecisionRoute
   '/cases/$caseId/documents': typeof CasesCaseIdDocumentsRoute
+  '/cases/$caseId/knowledge': typeof CasesCaseIdKnowledgeRoute
   '/cases/$caseId/policy': typeof CasesCaseIdPolicyRoute
   '/cases/$caseId/spreading': typeof CasesCaseIdSpreadingRoute
   '/cases/$caseId/': typeof CasesCaseIdIndexRoute
@@ -90,6 +97,7 @@ export interface FileRoutesByTo {
   '/cases/$caseId/audit': typeof CasesCaseIdAuditRoute
   '/cases/$caseId/decision': typeof CasesCaseIdDecisionRoute
   '/cases/$caseId/documents': typeof CasesCaseIdDocumentsRoute
+  '/cases/$caseId/knowledge': typeof CasesCaseIdKnowledgeRoute
   '/cases/$caseId/policy': typeof CasesCaseIdPolicyRoute
   '/cases/$caseId/spreading': typeof CasesCaseIdSpreadingRoute
   '/cases/$caseId': typeof CasesCaseIdIndexRoute
@@ -103,6 +111,7 @@ export interface FileRoutesById {
   '/cases/$caseId/audit': typeof CasesCaseIdAuditRoute
   '/cases/$caseId/decision': typeof CasesCaseIdDecisionRoute
   '/cases/$caseId/documents': typeof CasesCaseIdDocumentsRoute
+  '/cases/$caseId/knowledge': typeof CasesCaseIdKnowledgeRoute
   '/cases/$caseId/policy': typeof CasesCaseIdPolicyRoute
   '/cases/$caseId/spreading': typeof CasesCaseIdSpreadingRoute
   '/cases/$caseId/': typeof CasesCaseIdIndexRoute
@@ -117,6 +126,7 @@ export interface FileRouteTypes {
     | '/cases/$caseId/audit'
     | '/cases/$caseId/decision'
     | '/cases/$caseId/documents'
+    | '/cases/$caseId/knowledge'
     | '/cases/$caseId/policy'
     | '/cases/$caseId/spreading'
     | '/cases/$caseId/'
@@ -128,6 +138,7 @@ export interface FileRouteTypes {
     | '/cases/$caseId/audit'
     | '/cases/$caseId/decision'
     | '/cases/$caseId/documents'
+    | '/cases/$caseId/knowledge'
     | '/cases/$caseId/policy'
     | '/cases/$caseId/spreading'
     | '/cases/$caseId'
@@ -140,6 +151,7 @@ export interface FileRouteTypes {
     | '/cases/$caseId/audit'
     | '/cases/$caseId/decision'
     | '/cases/$caseId/documents'
+    | '/cases/$caseId/knowledge'
     | '/cases/$caseId/policy'
     | '/cases/$caseId/spreading'
     | '/cases/$caseId/'
@@ -209,6 +221,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CasesCaseIdDocumentsRouteImport
       parentRoute: typeof CasesCaseIdRoute
     }
+    '/cases/$caseId/knowledge': {
+      id: '/cases/$caseId/knowledge'
+      path: '/knowledge'
+      fullPath: '/cases/$caseId/knowledge'
+      preLoaderRoute: typeof CasesCaseIdKnowledgeRouteImport
+      parentRoute: typeof CasesCaseIdRoute
+    }
     '/cases/$caseId/policy': {
       id: '/cases/$caseId/policy'
       path: '/policy'
@@ -231,6 +250,7 @@ interface CasesCaseIdRouteChildren {
   CasesCaseIdAuditRoute: typeof CasesCaseIdAuditRoute
   CasesCaseIdDecisionRoute: typeof CasesCaseIdDecisionRoute
   CasesCaseIdDocumentsRoute: typeof CasesCaseIdDocumentsRoute
+  CasesCaseIdKnowledgeRoute: typeof CasesCaseIdKnowledgeRoute
   CasesCaseIdPolicyRoute: typeof CasesCaseIdPolicyRoute
   CasesCaseIdSpreadingRoute: typeof CasesCaseIdSpreadingRoute
   CasesCaseIdIndexRoute: typeof CasesCaseIdIndexRoute
@@ -241,6 +261,7 @@ const CasesCaseIdRouteChildren: CasesCaseIdRouteChildren = {
   CasesCaseIdAuditRoute: CasesCaseIdAuditRoute,
   CasesCaseIdDecisionRoute: CasesCaseIdDecisionRoute,
   CasesCaseIdDocumentsRoute: CasesCaseIdDocumentsRoute,
+  CasesCaseIdKnowledgeRoute: CasesCaseIdKnowledgeRoute,
   CasesCaseIdPolicyRoute: CasesCaseIdPolicyRoute,
   CasesCaseIdSpreadingRoute: CasesCaseIdSpreadingRoute,
   CasesCaseIdIndexRoute: CasesCaseIdIndexRoute,
