@@ -36,7 +36,7 @@ interface ChatMessage {
   id: string;
   role: "user" | "assistant";
   text: string;
-  detail?: string;
+  detail?: string | undefined;
   time: string;
   highlight?: string[];
 }
