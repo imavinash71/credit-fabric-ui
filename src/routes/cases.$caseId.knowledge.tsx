@@ -29,7 +29,7 @@ export const Route = createFileRoute("/cases/$caseId/knowledge")({
       },
     ],
   }),
-  component: KnowledgeWorkspace;
+  component: KnowledgeWorkspace,
 });
 
 interface ChatMessage {
