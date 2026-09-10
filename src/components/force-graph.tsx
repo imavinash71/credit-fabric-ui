@@ -315,8 +315,7 @@ export function ForceGraph({ highlight, mode, onModeChange, onSelect, selectedId
       n.fy = null;
     });
     simRef.current?.alpha(1);
-    run();
-    window.setTimeout(fit, 400);
+    run(true);
   }
 
   const btn =
