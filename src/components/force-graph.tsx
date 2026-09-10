@@ -170,7 +170,7 @@ export function ForceGraph({ highlight, mode, onModeChange, onSelect, selectedId
       .velocityDecay(0.8)
       .stop();
     simRef.current = sim;
-    run();
+    run(true);
     return () => {
       sim.stop();
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
@@ -201,7 +201,7 @@ export function ForceGraph({ highlight, mode, onModeChange, onSelect, selectedId
     if (!sim) return;
     sim.force("center", forceCenter(size.w / 2, size.h / 2));
     sim.alpha(0.5);
-    run();
+    run(true);
   }, [size, run]);
 
   const visibleIds = useMemo(
@@ -227,11 +227,14 @@ export function ForceGraph({ highlight, mode, onModeChange, onSelect, selectedId
     });
   }, [nodes, visibleIds, size]);
 
-  // Fit when the visible set or the pane size changes
+  fitRef.current = fit;
+
+  // Fit when the visible set changes
   useEffect(() => {
     const id = window.setTimeout(fit, 350);
     return () => window.clearTimeout(id);
-  }, [fit]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visibleIds]);
 
   function zoomBy(factor: number) {
     setView((v) => {
