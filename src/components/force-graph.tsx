@@ -379,7 +379,7 @@ export function ForceGraph({ highlight, mode, onModeChange, onSelect, selectedId
               return (
                 <g
                   key={`${s.id}-${t.id}`}
-                  opacity={highlight.length === 0 || on ? 1 : 0.2}
+                  opacity={highlight.length === 0 || on ? 1 : mode === "path" ? 0.2 : 0.4}
                   className="transition-opacity duration-300"
                   onMouseEnter={() => setHoveredLink(l)}
                   onMouseLeave={() => setHoveredLink(null)}
@@ -422,12 +422,13 @@ export function ForceGraph({ highlight, mode, onModeChange, onSelect, selectedId
             {nodes.map((n) => {
               if (!visibleIds.has(n.id)) return null;
               const dim = highlight.length > 0 && !highlight.includes(n.id);
+              const dimOpacity = mode === "path" ? 0.25 : 0.5;
               const glow = hovered?.id === n.id || selectedId === n.id || highlight.includes(n.id);
               return (
                 <g
                   key={n.id}
                   transform={`translate(${n.x ?? 0},${n.y ?? 0})`}
-                  opacity={dim ? 0.25 : 1}
+                  opacity={dim ? dimOpacity : 1}
                   className="transition-opacity duration-300"
                   style={{ cursor: panMode ? "grab" : "pointer" }}
                   onPointerDown={(e) => {
