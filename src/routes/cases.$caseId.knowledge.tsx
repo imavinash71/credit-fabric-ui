@@ -156,7 +156,11 @@ function KnowledgeWorkspace() {
   const legendKinds = useMemo(() => Object.keys(nodeKindMeta) as NodeKind[], []);
 
   return (
-    <div ref={splitRef} className="flex animate-in fade-in duration-500 items-stretch">
+    <div
+      ref={splitRef}
+      className="flex animate-in fade-in duration-500 items-stretch"
+      style={dragging ? { userSelect: "none", cursor: "grabbing" } : undefined}
+    >
       {/* Chat pane */}
       <div className="min-w-0" style={{ width: `${leftPct}%`, transition: paneTransition }}>
         <Panel
