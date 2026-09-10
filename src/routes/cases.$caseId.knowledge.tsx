@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Download, Maximize2, Pin, Send, Share2 } from "lucide-react";
-import { Panel, Pill } from "@/components/primitives";
+import { Panel } from "@/components/primitives";
 import { ForceGraph } from "@/components/force-graph";
 import {
   chatAnswers,
@@ -340,10 +340,6 @@ function KnowledgeWorkspace() {
         )}
       </div>
 
-      {/* Pill import kept for typing parity */}
-      <span className="hidden">
-        <Pill tone="info">graph</Pill>
-      </span>
     </div>
   );
 }
