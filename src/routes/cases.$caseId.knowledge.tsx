@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Download, Maximize2, Pin, Send, Share2 } from "lucide-react";
-import { Panel, Pill } from "@/components/primitives";
+import { Panel } from "@/components/primitives";
 import { ForceGraph } from "@/components/force-graph";
 import {
   chatAnswers,
@@ -156,7 +156,11 @@ function KnowledgeWorkspace() {
   const legendKinds = useMemo(() => Object.keys(nodeKindMeta) as NodeKind[], []);
 
   return (
-    <div ref={splitRef} className="flex animate-in fade-in duration-500 items-stretch">
+    <div
+      ref={splitRef}
+      className="flex animate-in fade-in duration-500 items-stretch"
+      style={dragging ? { userSelect: "none", cursor: "grabbing" } : undefined}
+    >
       {/* Chat pane */}
       <div className="min-w-0" style={{ width: `${leftPct}%`, transition: paneTransition }}>
         <Panel
@@ -280,8 +284,8 @@ function KnowledgeWorkspace() {
         aria-orientation="vertical"
         onPointerDown={startResize}
         onDoubleClick={() => setLeftPct(60)}
-        className="group relative mx-1.5 flex w-2 shrink-0 items-center justify-center"
-        style={{ cursor: dragging ? "grabbing" : "grab" }}
+        className="group relative mx-1.5 flex w-3 shrink-0 select-none items-center justify-center"
+        style={{ cursor: dragging ? "grabbing" : "grab", touchAction: "none" }}
       >
         <span
           className={`h-full w-px rounded-full shadow-sm transition-all duration-300 ${
@@ -340,10 +344,6 @@ function KnowledgeWorkspace() {
         )}
       </div>
 
-      {/* Pill import kept for typing parity */}
-      <span className="hidden">
-        <Pill tone="info">graph</Pill>
-      </span>
     </div>
   );
 }

@@ -134,7 +134,9 @@ export function ForceGraph({ highlight, mode, onModeChange, onSelect, selectedId
   const viewRef = useRef(view);
   viewRef.current = view;
 
-  const run = useCallback(() => {
+  const fitRef = useRef<() => void>(() => {});
+
+  const run = useCallback((autoFit = false) => {
     const sim = simRef.current;
     if (!sim) return;
     let ticks = 0;
@@ -147,6 +149,7 @@ export function ForceGraph({ highlight, mode, onModeChange, onSelect, selectedId
         rafRef.current = requestAnimationFrame(step);
       } else {
         rafRef.current = null;
+        if (autoFit) fitRef.current();
       }
     };
     rafRef.current = requestAnimationFrame(step);
@@ -167,7 +170,7 @@ export function ForceGraph({ highlight, mode, onModeChange, onSelect, selectedId
       .velocityDecay(0.8)
       .stop();
     simRef.current = sim;
-    run();
+    run(true);
     return () => {
       sim.stop();
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
@@ -198,7 +201,7 @@ export function ForceGraph({ highlight, mode, onModeChange, onSelect, selectedId
     if (!sim) return;
     sim.force("center", forceCenter(size.w / 2, size.h / 2));
     sim.alpha(0.5);
-    run();
+    run(true);
   }, [size, run]);
 
   const visibleIds = useMemo(
@@ -224,11 +227,14 @@ export function ForceGraph({ highlight, mode, onModeChange, onSelect, selectedId
     });
   }, [nodes, visibleIds, size]);
 
-  // Fit when the visible set or the pane size changes
+  fitRef.current = fit;
+
+  // Fit when the visible set changes
   useEffect(() => {
     const id = window.setTimeout(fit, 350);
     return () => window.clearTimeout(id);
-  }, [fit]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visibleIds]);
 
   function zoomBy(factor: number) {
     setView((v) => {
@@ -309,8 +315,7 @@ export function ForceGraph({ highlight, mode, onModeChange, onSelect, selectedId
       n.fy = null;
     });
     simRef.current?.alpha(1);
-    run();
-    window.setTimeout(fit, 400);
+    run(true);
   }
 
   const btn =
@@ -374,7 +379,7 @@ export function ForceGraph({ highlight, mode, onModeChange, onSelect, selectedId
               return (
                 <g
                   key={`${s.id}-${t.id}`}
-                  opacity={highlight.length === 0 || on ? 1 : 0.2}
+                  opacity={highlight.length === 0 || on ? 1 : mode === "path" ? 0.2 : 0.4}
                   className="transition-opacity duration-300"
                   onMouseEnter={() => setHoveredLink(l)}
                   onMouseLeave={() => setHoveredLink(null)}
@@ -417,12 +422,13 @@ export function ForceGraph({ highlight, mode, onModeChange, onSelect, selectedId
             {nodes.map((n) => {
               if (!visibleIds.has(n.id)) return null;
               const dim = highlight.length > 0 && !highlight.includes(n.id);
+              const dimOpacity = mode === "path" ? 0.25 : 0.5;
               const glow = hovered?.id === n.id || selectedId === n.id || highlight.includes(n.id);
               return (
                 <g
                   key={n.id}
                   transform={`translate(${n.x ?? 0},${n.y ?? 0})`}
-                  opacity={dim ? 0.25 : 1}
+                  opacity={dim ? dimOpacity : 1}
                   className="transition-opacity duration-300"
                   style={{ cursor: panMode ? "grab" : "pointer" }}
                   onPointerDown={(e) => {
