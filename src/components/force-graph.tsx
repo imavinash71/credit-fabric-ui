@@ -134,7 +134,9 @@ export function ForceGraph({ highlight, mode, onModeChange, onSelect, selectedId
   const viewRef = useRef(view);
   viewRef.current = view;
 
-  const run = useCallback(() => {
+  const fitRef = useRef<() => void>(() => {});
+
+  const run = useCallback((autoFit = false) => {
     const sim = simRef.current;
     if (!sim) return;
     let ticks = 0;
@@ -147,6 +149,7 @@ export function ForceGraph({ highlight, mode, onModeChange, onSelect, selectedId
         rafRef.current = requestAnimationFrame(step);
       } else {
         rafRef.current = null;
+        if (autoFit) fitRef.current();
       }
     };
     rafRef.current = requestAnimationFrame(step);
