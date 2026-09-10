@@ -280,8 +280,8 @@ function KnowledgeWorkspace() {
         aria-orientation="vertical"
         onPointerDown={startResize}
         onDoubleClick={() => setLeftPct(60)}
-        className="group relative mx-1.5 flex w-2 shrink-0 items-center justify-center"
-        style={{ cursor: dragging ? "grabbing" : "grab" }}
+        className="group relative mx-1.5 flex w-3 shrink-0 select-none items-center justify-center"
+        style={{ cursor: dragging ? "grabbing" : "grab", touchAction: "none" }}
       >
         <span
           className={`h-full w-px rounded-full shadow-sm transition-all duration-300 ${
