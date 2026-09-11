@@ -104,10 +104,9 @@ export function AppShell({ children }: { children: ReactNode }) {
   }, []);
 
   const toggle = () => {
-    setCollapsed((prev) => {
-      sessionStorage.setItem(STORAGE_KEY, prev ? "0" : "1");
-      return !prev;
-    });
+    const next = !collapsed;
+    sessionStorage.setItem(STORAGE_KEY, next ? "1" : "0");
+    setCollapsed(next);
   };
 
   const width = collapsed ? "5rem" : "16rem";
