@@ -190,37 +190,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           )}
         </aside>
 
-        <div
-          className="transition-[padding] duration-300"
-          style={{ transitionTimingFunction: EASE, paddingLeft: undefined }}
-        >
-          <div
-            className="hidden lg:block"
-            style={{ transitionTimingFunction: EASE }}
-            aria-hidden
-          />
-          <div
-            className="transition-[padding-left] duration-300"
-            style={{ transitionTimingFunction: EASE }}
-          >
-            <div className="lg:[--sidebar-w:0px]" />
-          </div>
-          <div
-            className="transition-[padding-left] duration-300"
-            style={{ transitionTimingFunction: EASE }}
-          >
-            <div />
-          </div>
-        </div>
-
-        <div
-          className="transition-[padding-left] duration-300"
-          style={{
-            transitionTimingFunction: EASE,
-            paddingLeft: 0,
-          }}
-        >
-          <SidebarOffset width={width}>
+        <SidebarOffset width={width}>
             <header className="sticky top-0 z-20 flex h-14 items-center gap-4 border-b border-border bg-surface/95 px-5 backdrop-blur">
               <div className="relative hidden max-w-md flex-1 md:block">
                 <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
